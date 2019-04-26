@@ -1,14 +1,13 @@
-var Word = require(".word.js");
+var Word = require("./word.js");
 var inquirer = require("inquirer");
-
-
+const chalk = require("chalk");
 var remGuessez = 10;
-var newWordtime = false;
+
 var incorrect = [];
 var correct = [];
 var letterArray = "abcdefghijklmnopqrstuvwxyz";
 
-const daWordz = [
+var daWordz = [
   "beetlejuice",
   "hocus pocus",
   "halloween",
@@ -21,114 +20,127 @@ const daWordz = [
   "carrie"
 ];
 
-function generate() {
-    var new = Math.floor(Math.random() * daWordz.length);
-    var guessingWord = daWordz[new];
-    // var disWord = daWordz[index];
-}
+// function generate() {
+//   return Math.floor(Math.random() * daWordz.length);
 
-guessThisShit = new Word(guessingWord); 
-console.log(guessThisShit);
+// }
+
+var rando = Math.floor(Math.random() * daWordz.length);
+var guessingWord = daWordz[rando];
+
+guessThisShit = new Word(guessingWord);
+var newWordtime = false;
 
 function dothething() {
-    if (newWordtime) {
-        generate();
-        guessThisShit = new Word(guessingWord);
+  if (newWordtime) {
+    var rando = Math.floor(Math.random() * daWordz.length);
+    var guessingWord = daWordz[rando];
+    guessThisShit = new Word(guessingWord);
 
-        newWordtime = false;
+    newWordtime = false;
+  }
 
-    }
+  var wordisDun = [];
+  guessThisShit.objArray.forEach(completeCheck);
 
-    var wordisDun [];
-    guessThisShit.objArray.forEach(completeCheck);
+  if (wordisDun.includes(false)) {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Guess a letter...if you DARE\n",
+          name: "userinput"
+        }
+      ])
+      .then(function(input) {
+        if (
+          !letterArray.includes(input.userinput) ||
+          input.userinput.length > 1
+        ) {
+          console.log(
+            chalk.red(
+              "\nTry again hombre (or only guess one letter (;)\n~*~*~*~**~*~*~*~*~*~*~\n"
+            )
+          );
+          dothething();
+        } else {
+          if (
+            incorrect.includes(input.userinput) ||
+            correct.includes(input.userinput) ||
+            input.userinput === ""
+          ) {
+            console.log(chalk.red("\nMmmmh...Try another letter bud\n"));
+            dothething();
+          } else {
+            var checkWord = [];
+            guessThisShit.userGuess(input.userinput);
 
-    if wordisDun.includes(false)) {
-        inquirer
-            .prompt([
-                {
-                    type: "input",
-                    message: "Guess a letter...if you DARE",
-                    name: "userinput"
-                }
-            ])
-        then.(function (input) {
-            if (!letterArray.includes(input.userinput) || input.userinput.length > 1) {
-                console.log("\nTry again hombre\n~*~*~*~**~*~*~*~*~*~*~\n");
-                dothething();
+            guessThisShit.objArray.forEach(wordCheck);
+            if (checkWord.join("") === wordisDun.join("")) {
+              console.log(chalk.red("\nYikkkesssss\n"));
+
+              incorrect.push(input.userinput);
+              remGuessez--;
+            } else {
+              console.log(chalk.green("\nYou got this home slice\n"));
+              correct.push(input.userinput);
             }
-            else {
-                if (incorrect.includes(input.userinput) || correct.inclues(input.userinput) || input.userinput === "") {
-                    console.log("\nMmmmh...Try another letter bud\n");
-                    dothething();
-                }
-                else {
-                    var checkWord = [];
-                    guessThisShit.userGuess(input.userinput);
+            guessThisShit.log();
 
-                    guessThisShit.objArray.forEach(wordCheck);
-                    if (checkWord.join('') === wordisDun.join('')) {
-                        console.log("\nYikkkesssss\n");
+            console.log(
+              chalk.magenta("You have dis many guesses: ") + remGuessez + "\n"
+            );
 
-                        incorrect.push(input.userinput);
-                        remGuessez--;
+            console.log(
+              chalk.magenta("Youve guessed: ") + incorrect.join(" ") + "\n"
+            );
 
-                    }
-                    else {
-                        console.log("\nRock on bud\n");
-                        correct.push(input.userinput)
-                    }
-                    guessThisShit.log();
+            if (remGuessez > 0) {
+              dothething();
+            } else {
+              console.log(chalk.yellow("You bombed that shit\n"));
 
-                    console.log("You have dis many guesses:" + remGuessez + "\n~*~*~*~*~*~*~*\n");
-
-                    console.log("Youve guessed: " + incorrect.join(" ") + "\n`*~*~*~*~*~\n");
-
-                    if (remGuessez > 0) {
-                        dothething();
-                        
-                    } else {
-                        console.log("You bombed that shit\n");
-                    
-                        restart();
-                    }
-
-                    function wordCheck(key) {
-                        checkWord.push(key.guessed);
-                    }
-                }
+              restart();
             }
-            
-        })
-    } else {
-        console.log("WINNER WINNER CHICKEN DINNER\n");
-        restart();
-    }
 
-    function completeCheck(key) {
-        wordisDun.push(key.guessed);
-    }
+            function wordCheck(key) {
+              checkWord.push(key.guessed);
+            }
+          }
+        }
+      });
+  } else {
+    console.log(
+      chalk.cyanBright("~*~*~*~*WINNER WINNER CHICKEN DINNER~*~*~*~*~*~*~*\n")
+    );
+    restart();
+  }
+
+  function completeCheck(key) {
+    wordisDun.push(key.guessed);
+  }
 }
-    function restart() {
-        inquirer
-            .prompt([
-                {
-                    type: "list",
-                    message: "Whatchu wanna do?:",
-                    choices: ["Go again", "go bye bye"],
-                    name: "restart"
-                }
-            ])
-            .then(function (input) {
-                if (input.restart === "Go again") {
-                    newWordtime = true;
-                    incorrect = [];
-                    correct = [];
-                    remGuessez = 10;
-                    dothething();
-                } else {
-                    return
-                }
-            })
-    }
+function restart() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: chalk.green("Whatchu wanna do?:"),
+        choices: ["Go again", "go bye bye"],
+        name: "restart"
+      }
+    ])
+    .then(function(input) {
+      if (input.restart === "Go again") {
+        newWordtime = true;
+        incorrect = [];
+        correct = [];
+        remGuessez = 10;
+        dothething();
+      } else {
+        return;
+      }
+    });
+}
 
 dothething();
