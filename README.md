@@ -19,7 +19,7 @@ This game uses constructors to operate, and is able to take user input using the
 <li>an array of ~*new*~ letter objects that represent the letters of the underlying word.</li>
 <li>a function that returns a string to rep. the word. -- it also calls the function in letter.js that displays the underscore and cocatenates them togeter. </li>
 <li>a function that takes a character and calls the guess function on each letter</li></ul>
-<img src="word.png"><br>
+<img src="word.PNG"><br>
 <br>
 <h3>The index.js file contains</h3> <ul>
 <li> code to randomly select a word and stores it in the word constructor</li>
