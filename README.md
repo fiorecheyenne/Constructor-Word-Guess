@@ -6,8 +6,8 @@ This game uses constructors to operate, and is able to take user input using the
 
 <table>
 <tr>
-<th>Components/Info</th>
-<th>Snippet</th>
+<td>Components/Info</td>
+<td>Snippet</td>
 </tr>
 <tr>
 <td>
