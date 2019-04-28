@@ -18,7 +18,7 @@ This game uses constructors to operate, and is able to take user input using the
 <li> A CONSTRUCTOR!!!!!!!! surprised? -- this one has a word that is dependent on the letter constructor.  It creates an object representing the current word to be guessed.</li>
 <li>an array of ~*new*~ letter objects that represent the letters of the underlying word.</li>
 <li>a function that returns a string to rep. the word. -- it also calls the function in letter.js that displays the underscore and cocatenates them togeter. </li>
-<li>a function that takes a character and calls the guess function on each letter</li>
+<li>a function that takes a character and calls the guess function on each letter</li></ul>
 <img src="word.png"><br>
 <br>
 <h3>The index.js file contains</h3> <ul>
