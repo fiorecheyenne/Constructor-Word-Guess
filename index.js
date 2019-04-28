@@ -62,6 +62,9 @@ function dothething() {
               "\nTry again hombre (or only guess one letter (;)\n~*~*~*~**~*~*~*~*~*~*~\n"
             )
           );
+
+          remGuessez--;
+          console.log(chalk.magenta("Guesses left: " + remGuessez));
           dothething();
         } else {
           if (
@@ -70,6 +73,12 @@ function dothething() {
             input.userinput === ""
           ) {
             console.log(chalk.red("\nMmmmh...Try another letter bud\n"));
+            remGuessez--;
+            console.log(
+              chalk.magenta("Ya only got: ") +
+                remGuessez +
+                chalk.magenta(" guesses left")
+            );
             dothething();
           } else {
             var checkWord = [];
@@ -92,7 +101,11 @@ function dothething() {
             );
 
             console.log(
-              chalk.magenta("Youve guessed: ") + incorrect.join(" ") + "\n"
+              chalk.magenta("Youve guessed: ") +
+                incorrect.join(" ") +
+                "\n" +
+                correct.join(" ") +
+                "\n"
             );
 
             if (remGuessez > 0) {
@@ -144,3 +157,9 @@ function restart() {
 }
 
 dothething();
+function sthap() {
+  if (remGuessez === 0) {
+    dothething;
+  }
+}
+sthap();
