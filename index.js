@@ -62,6 +62,7 @@ function dothething() {
               "\nTry again hombre (or only guess one letter (;)\n~*~*~*~**~*~*~*~*~*~*~\n"
             )
           );
+          sthap();
 
           remGuessez--;
           console.log(chalk.magenta("Guesses left: " + remGuessez));
@@ -74,6 +75,7 @@ function dothething() {
           ) {
             console.log(chalk.red("\nMmmmh...Try another letter bud\n"));
             remGuessez--;
+            sthap();
             console.log(
               chalk.magenta("Ya only got: ") +
                 remGuessez +
@@ -109,6 +111,7 @@ function dothething() {
             );
 
             if (remGuessez > 0) {
+              sthap();
               dothething();
             } else {
               console.log(chalk.yellow("You bombed that shit\n"));
