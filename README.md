@@ -12,7 +12,7 @@ This game uses constructors to operate, and is able to take user input using the
 <li>function to return underling character if a letter was already guessed ORRRRR an underscore if it has not </li>
 <li>function that takes a character as an arguement and checks it against the underlying character && updates the stored boolean (<i>if guessed correctly</i>)</ul><br>
 
-<img src="letter.PNG""><br>
+<img src="letter.PNG"><br>
 
 <h3>The word.js file contains </h3><ul>
 <li> A CONSTRUCTOR!!!!!!!! surprised? -- this one has a word that is dependent on the letter constructor.  It creates an object representing the current word to be guessed.</li>
