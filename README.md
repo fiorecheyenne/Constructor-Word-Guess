@@ -11,4 +11,4 @@ A word guess game that is played completley in the command line! <br>
 - Javascript <br>
 <h1>
 Wanna see? </h1><br>
-<img src="./guess.gif">
+<img src="./fix.gif">
